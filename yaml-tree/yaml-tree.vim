@@ -9,6 +9,13 @@ nnoremap <F5> :YamlTree<CR>
 " Toggle: open if missing, close if exists
 " --------------------------------------------------------------------------
 function! YAMLTreeToggle() abort
+	" Prevent use outside YAML
+	if &filetype !=# 'yaml'
+    echo "Not a YAML file"
+    return
+	endif
+
+	" If tree is open, close it
   if exists("g:yaml_tree_win") && win_gotoid(g:yaml_tree_win)
     " Tree window exists: close it
     execute "close"
